@@ -1,0 +1,59 @@
+CREATE DATABASE k1_2;
+
+CREATE TABLE rok(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	naziv VARCHAR(30) NOT NULL,
+	datumPocetka DATE NOT NULL,
+	datumZavrsetka DATE NOT NULL
+);
+
+CREATE TABLE predmet(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	naziv VARCHAR(255) NOT NULL,
+	espb INT NOT NULL
+);
+
+CREATE TABLE student(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	brojIndeksa VARCHAR(9),
+	ime VARCHAR(100),
+	prezime VARCHAR(100)
+
+);
+
+CREATE TABLE prijava(
+	student INT,
+	predmet INT,
+	rok INT,
+	PRIMARY KEY (student, predmet, rok),
+	datum DATE,
+	ocena INT,
+	FOREIGN KEY (student) REFERENCES student (id),
+	FOREIGN KEY (predmet) REFERENCES predmet (id),
+	FOREIGN KEY (rok) REFERENCES rok (id)
+	
+);
+INSERT INTO rok (naziv, datumPocetka, datumZavrsetka) VALUES ('januarski','2025-01-01','2025-02-01');
+INSERT INTO rok (naziv, datumPocetka, datumZavrsetka) VALUES ('februarski','2025-02-02','2025-03-01');
+INSERT INTO rok (naziv, datumPocetka, datumZavrsetka) VALUES ('martovski','2025-03-02','2025-03-31');
+
+INSERT INTO predmet (naziv, espb) VALUES 
+('Matematika', 6),
+('Programiranje', 8),
+('Baze Podataka', 7),
+('Operativni Sistemi', 6),
+('Algoritmi i Strukture Podataka', 9);
+
+INSERT INTO student (brojIndeksa, ime, prezime) VALUES 
+('2021/001', 'Marko', 'Marković'),
+('2021/002', 'Ana', 'Anić'),
+('2021/003', 'Jovan', 'Jovanović'),
+('2021/004', 'Milica', 'Milić'),
+('2021/005', 'Petar', 'Petrović');
+
+INSERT INTO prijava (student, predmet, rok, datum, ocena) VALUES 
+(1, 1, 1, '2024-01-15', 8),
+(2, 2, 2, '2024-02-20', 9),
+(3, 3, 3, '2024-03-10', 7),
+(4, 4, 2, '2024-04-05', 10),
+(5, 5, 1, '2024-01-18', 6);
